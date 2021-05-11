@@ -283,3 +283,19 @@ provisioner:
 		}
 	}
 ```
+
+
+Cross-compile for armv6
+-----------------------
+
+Smallstep doesn't distribute a binary for Raspberry Pi Zero armv6 architecture. Use the following
+commands to build on macOS. You could build on Raspbian, but the golang version in apt was 1.11, and
+too old to build `step` at time of writing.
+
+```
+git clone --branch=v0.15.14 https://github.com/smallstep/cli.git /tmp/step-cli
+cd /tmp/step-cli
+GOOS=linux GOARCH=arm GOARM=6 make build
+tar czf step-0.15.14-armv6.tar.gz -C bin step
+mv step-0.15.14-armv6.tar.gz ~
+```
