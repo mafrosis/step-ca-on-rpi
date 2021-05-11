@@ -1,0 +1,23 @@
+---
+version: '3'
+
+volumes:
+  step-db: {}
+
+services:
+  step-ca:
+    image: mafrosis/step-ca:0.15.11
+    command: /etc/step-ca/config/ca.json
+    build:
+      context: .
+      args:
+        STEP_VERSION: 0.15.14
+        STEP_CERTS_VERSION: 0.15.11
+    environment:
+      - YUBIKEY_PIN
+    ports:
+      - 8443:8443
+    volumes:
+      - ./step-config:/etc/step-ca
+      - step-db:/etc/step-ca/db
+      - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
