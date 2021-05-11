@@ -257,3 +257,29 @@ step ssh config
 
 - https://smallstep.com/blog/diy-single-sign-on-for-ssh/
 - https://github.com/smallstep/certificates/blob/master/docs/provisioners.md#oidc
+
+
+Configure an SSH template with custom principals
+------------------------------------------------
+
+When using the [OIDC provisioner](https://github.com/smallstep/certificates/blob/master/docs/provisioners.md#oidc)
+to issue SSH certs, you are limited to only issuing certs with a principal which matches the email
+of the OIDC identity - eg. if your email is `bob@example.com`, then the principals on your cert will
+be `bob` and `bob@example.com`.
+
+This is fine if you're logging into a server as `bob`, using an OIDC identity of `bob@example.com`.
+It doesn't work if you're, say, logging in as user `pi`, using an OIDC identity of `mafro@example.com`.
+
+This can be solved using [templated SSH certs](https://smallstep.com/blog/clever-uses-of-ssh-certificate-templates)!
+
+Modify the `principals` field of an [SSH user template](./step-config/templates/ssh/mafro.tpl), and
+update the CA config at `$STEPPATH/config/ca.json` to include the following to the `OIDC`
+provisioner:
+
+```
+	"options": {
+		"ssh": {
+			"templateFile": "templates/ssh/mafro.tpl"
+		}
+	}
+```

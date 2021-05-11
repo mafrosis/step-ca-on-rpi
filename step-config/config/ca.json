@@ -5,7 +5,7 @@
 	"key": "yubikey:slot-id=83",
 	"kms": {
 		"type": "yubikey",
-		"pin": "YUBIPIN"
+		"pin": ""
 	},
 	"ssh": {
 		"hostKey": "yubikey:slot-id=84",
@@ -46,8 +46,8 @@
 			{
 				"type": "OIDC",
 				"name": "Google",
-				"clientID": "824164598483-31g7aht6k9ulp4rgus8eijjoq0392q6v.apps.googleusercontent.com",
-				"clientSecret": "Hgy2ukWHkb0qpl8H7hRZNrZD",
+				"clientID": "824164598483-frmggjqidnm16kjob9ud8a6a6ahvub1v.apps.googleusercontent.com",
+				"clientSecret": "",
 				"configurationEndpoint": "https://accounts.google.com/.well-known/openid-configuration",
 				"admins": [
 					"m@mafro.net"
@@ -57,6 +57,11 @@
 				],
 				"claims": {
 					"enableSSHCA": true
+				},
+				"options": {
+					"ssh": {
+						"templateFile": "templates/ssh/mafro.tpl"
+					}
 				}
 			},
 			{

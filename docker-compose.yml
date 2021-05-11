@@ -15,6 +15,7 @@ services:
         STEP_CERTS_VERSION: 0.15.11
     environment:
       - YUBIKEY_PIN
+      - OAUTH_CLIENT_SECRET
     ports:
       - 8443:8443
     volumes:
