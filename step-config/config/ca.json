@@ -3,19 +3,24 @@
 	"federatedRoots": [],
 	"crt": "/etc/step-ca/certs/intermediate_ca.crt",
 	"key": "yubikey:slot-id=83",
-	"kms": {
-		"type": "yubikey",
-		"pin": ""
-	},
-	"ssh": {
-		"hostKey": "yubikey:slot-id=84",
-		"userKey": "yubikey:slot-id=85"
-	},
 	"address": ":8443",
 	"dnsNames": [
 		"ca.mafro.net",
 		"ringil"
 	],
+	"kms": {
+		"type": "yubikey",
+		"credentialsFile": "",
+		"uri": "",
+		"pin": "",
+		"managementKey": "",
+		"region": "",
+		"profile": ""
+	},
+	"ssh": {
+		"hostKey": "yubikey:slot-id=84",
+		"userKey": "yubikey:slot-id=85"
+	},
 	"logger": {
 		"format": "text"
 	},
