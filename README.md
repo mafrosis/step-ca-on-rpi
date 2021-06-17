@@ -156,26 +156,45 @@ Google does the authentication for us, and `step-ca` issues the cert.
 ┌──────────┐            ┌──────────┐           ┌─ ── ── ── ── ─┐
 │          │            │          │
 │  Client  │────SSH────▶│  Server  │           │    Google     │
-│          │            │          │           │   oAuth app   │
+│  (macOS) │            │  (locke) │               oAuth app
+│          │            │          │           │               │
 └──────────┘            └──────────┘
       │                                        └─ ── ── ── ── ─┘
       │                                                ▲
       │                 ┌──────────┐                   │
     request             │          │                   │
       cert─────────────▶│    CA    │────authenticate───┘
+                        │ (ringil) │
                         │          │
                         └──────────┘
 ```
 
-#### Setup the Google oAuth app
-
 Note: The naming convention here is to SSH from the _client_ into the _host_ server.
+
+
+#### Setup the Google oAuth app
 
  1. Configure oAuth consent at https://console.developers.google.com/apis/credentials/consent
  2. Create an oAuth app at https://console.cloud.google.com/apis/credentials
    a. Click `Create credentials`, choosing `OAuth client ID`
    b. Select `Desktop app` as application type
    c. Retain your client ID and client secret
+
+
+#### Configure the CA to support this OIDC app
+
+Next, we must configure the CA with a new OIDC provisioner (named "Google") using above secrets. The
+`--domain` parameter is your Google SSO domain name.
+
+```
+> step ca provisioner add Google --type=OIDC --ssh \
+    --client-id "$OIDC_CLIENT_ID" \
+    --client-secret "$OIDC_CLIENT_SECRET" \
+    --configuration-endpoint 'https://accounts.google.com/.well-known/openid-configuration' \
+    --domain mafro.net
+Success! Your `step-ca` config has been updated. To pick up the new configuration SIGHUP (kill -1 <pid>) or restart the step-ca process.
+```
+
 
 #### Create trust relationship between host server and our CA
 
@@ -187,7 +206,8 @@ On the host server, install the [Smallstep CLI tools](#install-smallstep-cli). N
 `step` client as usual:
 
 ```
-> step ca bootstrap --ca-url https://ca.example.com --fingerprint $CA_FINGERPRINT
+> FINGERPRINT=$(step certificate fingerprint root_ca.crt)
+> step ca bootstrap --ca-url https://ringil --fingerprint $FINGERPRINT
 The root certificate has been saved in $HOME/.step/certs/root_ca.crt.
 Your configuration has been saved in $HOME/.step/config/defaults.json.
 ```
