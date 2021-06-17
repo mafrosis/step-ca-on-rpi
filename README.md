@@ -242,16 +242,80 @@ In the following example, the host server is named `locke`. The steps are:
 > systemctl restart sshd
 ```
 
-#### Setup the client to use SSH via OIDC
+### Setup the client to use SSH via OIDC
 
 The following steps are run on the _client_ system, which is connecting to the host configured above.
 
 ```
-FINGERPRINT=$(step certificate fingerprint root_ca.crt)
-step ca bootstrap --ca-url https://ca.example.com --fingerprint $FINGERPRINT
-step ssh list --raw | step ssh inspect
-step ssh config
+> FINGERPRINT=$(step certificate fingerprint root_ca.crt)
+> step ca bootstrap --ca-url https://ringil --fingerprint $FINGERPRINT
+The root certificate has been saved in /Users/blackm/.step/certs/root_ca.crt.
+Your configuration has been saved in /Users/blackm/.step/config/defaults.json.
+> step ssh config
+✔ /Users/mafro/.ssh/config
+✔ /Users/mafro/.step/ssh/config
+✔ /Users/mafro/.step/ssh/known_hosts
 ```
+
+Configure your SSH client config such that step is used to generate the SSH certificate on demand:
+
+```
+> cat ~/.ssh/config
+Host locke
+    User pi
+    UserKnownHostsFile /Users/blackm/.step/ssh/known_hosts
+    ProxyCommand step ssh proxycommand %r %h %p --provisioner Google
+```
+
+The `Google` provisioner is the OIDC one created at the beginning.
+
+Now, using this configuration is as simple as `ssh locke`, and the OIDC flow is triggered:
+
+```
+> ssh locke
+✔ Provisioner: Google (OIDC) [client: 824164598483-frmggjqidnm16kjob9ud8a6a6ahvub1v.apps.googleusercontent.com]
+Your default web browser has been opened to visit:
+
+https://accounts.google.com/o/oauth2/v2/auth?<snip>
+
+✔ CA: https://ringil:8443
+Linux locke 5.10.17-v7l+ #1414 SMP Fri Apr 30 13:20:47 BST 2021 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Jun 17 06:07:51 2021 from 192.168.1.139
+pi@locke:~ >
+```
+
+If you wanted to have a peek at your SSH certificate, as provisioned by your CA:
+
+```
+> step ssh list --raw | step ssh inspect
+-:
+    Type: ecdsa-sha2-nistp256-cert-v01@openssh.com user certificate
+    Public key: ECDSA-CERT SHA256:1p9Ux0LVclOe3wFH9ISo+eUiqoAi/CoK7bE/VSdf2r0
+    Signing CA: ECDSA SHA256:WoobT5Uoi8cddLhcxILd5eLoPiq27iEaVCDV/oL/B6I
+    Key ID: "m@mafro.net"
+    Serial: 8826815887645788865
+    Valid: from 2021-06-17T05:44:17 to 2021-06-17T21:44:17
+    Principals:
+        m
+        m@mafro.net
+        mafro
+        pi
+    Critical Options: (none)
+    Extensions:
+        permit-agent-forwarding
+        permit-port-forwarding
+        permit-pty
+        permit-user-rc
+        permit-X11-forwarding
+```
+
 
 #### References for oAuth
 
