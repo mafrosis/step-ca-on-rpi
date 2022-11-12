@@ -1,4 +1,4 @@
-FROM golang:buster AS builder
+FROM golang:bullseye AS builder
 
 ARG STEP_VERSION=0.15.14
 ARG STEP_CERTS_VERSION=0.15.11
@@ -15,7 +15,7 @@ RUN curl -o /tmp/step.tgz -L https://github.com/smallstep/cli/releases/download/
 #RUN cd cli && make bootstrap && make build
 
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 COPY --from=builder /tmp/bin/step /usr/local/bin
 COPY --from=builder /go/certificates/bin/step-ca /usr/local/bin
