@@ -1,18 +1,16 @@
 ---
-version: '3'
-
 volumes:
   step-db: {}
 
 services:
   step-ca:
-    image: mafrosis/step-ca:0.15.11
+    image: mafrosis/step-ca:${STEP_CERTS_VERSION}
     command: /etc/step-ca/config/ca.json
     build:
       context: .
       args:
-        STEP_VERSION: 0.15.14
-        STEP_CERTS_VERSION: 0.15.11
+        STEP_VERSION: ${STEP_VERSION}
+        STEP_CERTS_VERSION: ${STEP_CERTS_VERSION}
     restart: unless-stopped
     environment:
       - YUBIKEY_PIN
