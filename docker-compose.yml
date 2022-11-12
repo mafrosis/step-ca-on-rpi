@@ -12,12 +12,11 @@ services:
         STEP_VERSION: ${STEP_VERSION}
         STEP_CERTS_VERSION: ${STEP_CERTS_VERSION}
     restart: unless-stopped
-    environment:
-      - YUBIKEY_PIN
-      - OAUTH_CLIENT_SECRET
     ports:
       - 4433:443
     volumes:
       - ./step-config:/etc/step-ca
       - step-db:/etc/step-ca/db
       - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
+    env_file:
+      - .secrets
