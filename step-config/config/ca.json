@@ -3,7 +3,7 @@
 	"federatedRoots": [],
 	"crt": "/etc/step-ca/certs/intermediate_ca.crt",
 	"key": "yubikey:slot-id=83",
-	"address": ":8443",
+	"address": ":443",
 	"dnsNames": [
 		"ca.mafro.net",
 		"ringil"

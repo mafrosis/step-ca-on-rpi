@@ -18,7 +18,7 @@ services:
       - YUBIKEY_PIN
       - OAUTH_CLIENT_SECRET
     ports:
-      - 8443:8443
+      - 4433:443
     volumes:
       - ./step-config:/etc/step-ca
       - step-db:/etc/step-ca/db
