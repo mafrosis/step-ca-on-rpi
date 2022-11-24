@@ -3,3 +3,5 @@ step-config/db
 step-config/secrets
 step-config/config/defaults.json
 .secrets
+
+root
