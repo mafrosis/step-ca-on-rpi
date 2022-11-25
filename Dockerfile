@@ -1,11 +1,13 @@
 ARG STEP_VERSION=0.22.0
 ARG STEP_CERTS_VERSION=0.22.1
+ARG ARCH=arm64
 
 
 FROM golang:1.18-alpine as builder
 
 ARG STEP_VERSION
 ARG STEP_CERTS_VERSION
+ARG ARCH
 
 RUN apk add --no-cache curl git build-base pcsc-lite-dev
 
@@ -15,7 +17,7 @@ RUN git clone -q --branch=v${STEP_CERTS_VERSION} --depth=1 https://github.com/sm
 	cd certificates && make bootstrap && make build GOFLAGS=""
 
 # Download and untar step-cli binary
-RUN curl -o /tmp/step.tgz -L https://github.com/smallstep/cli/releases/download/v${STEP_VERSION}/step_linux_${STEP_VERSION}_armv7.tar.gz && \
+RUN curl -o /tmp/step.tgz -L https://github.com/smallstep/cli/releases/download/v${STEP_VERSION}/step_linux_${STEP_VERSION}_${ARCH}.tar.gz && \
 	tar xzf /tmp/step.tgz --strip-components=1 -C /tmp
 
 
