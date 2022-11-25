@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 set -e
 
 # The path to step-ca config is the only param, passed via docker command
