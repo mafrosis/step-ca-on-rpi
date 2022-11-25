@@ -1,7 +1,11 @@
+ARG STEP_VERSION=0.22.0
+ARG STEP_CERTS_VERSION=0.22.1
+
+
 FROM golang:bullseye AS builder
 
-ARG STEP_VERSION=0.15.14
-ARG STEP_CERTS_VERSION=0.15.11
+ARG STEP_VERSION
+ARG STEP_CERTS_VERSION
 
 RUN apt-get update && apt-get install -y git libpcsclite-dev
 RUN git clone -q --branch=v${STEP_CERTS_VERSION} --depth=1 https://github.com/smallstep/certificates
