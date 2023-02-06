@@ -6,7 +6,8 @@
 	"address": ":443",
 	"dnsNames": [
 		"ca.mafro.net",
-		"ringil"
+		"locke.eggs",
+		"locke"
 	],
 	"kms": {
 		"type": "yubikey",
