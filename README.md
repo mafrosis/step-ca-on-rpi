@@ -16,16 +16,34 @@ Install Yubikey-Manager
 
 Install the C libs required for the Python install:
 
-    sudo apt install libpcsclite-dev pcscd swig
+    sudo apt install libpcsclite-dev pcscd swig python3-dev
 
 Then install the latest via pip:
 
-    pip install --user yubikey-manager
+    sudo pip install --user yubikey-manager
 
-Check everything is working:
+Check everything is working (as root!):
 
-    ykman -v
-    ykman info
+```
+# ykman -v
+YubiKey Manager (ykman) version: 5.0.1
+# ykman info
+WARNING: Failed opening device
+Device type: YubiKey 5 Nano
+Serial number: 12508380
+Firmware version: 5.2.7
+Form factor: Nano (USB-A)
+Enabled USB interfaces: OTP, FIDO, CCID
+
+Applications
+OTP             Enabled
+FIDO U2F        Enabled
+FIDO2           Enabled
+OATH            Enabled
+PIV             Enabled
+OpenPGP         Enabled
+YubiHSM Auth    Not available
+```
 
 
 Setup the Yubikey
@@ -34,7 +52,7 @@ Setup the Yubikey
 Reset the PIV settings on the Yubikey to their defaults:
 
 ```
-> ykman piv reset
+# ykman piv reset
 WARNING! This will delete all stored PIV data and restore factory settings. Proceed? [y/N]: y
 Resetting PIV data...
 Success! All PIV data have been cleared from the YubiKey.
