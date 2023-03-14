@@ -14,6 +14,14 @@ services:
     restart: unless-stopped
     ports:
       - 4433:443
+    extra_hosts:
+      # Required for step-ca to resolve docker hosts during http-01 challenge
+      unifi.mafro.net: 192.168.1.198
+      grafana.mafro.net: 192.168.1.198
+      edge.mafro.net: 192.168.1.198
+      pihole.mafro.net: 192.168.1.198
+      syncthing.mafro.net: 192.168.1.198
+      zigbee2mqtt.mafro.net: 192.168.1.198
     volumes:
       - ./step-config:/etc/step-ca
       - step-db:/etc/step-ca/db
