@@ -12,6 +12,8 @@ services:
         STEP_VERSION: ${STEP_VERSION}
         STEP_CERTS_VERSION: ${STEP_CERTS_VERSION}
     restart: unless-stopped
+    environment:
+      - TZ=Australia/Melbourne
     ports:
       - 4433:443
     extra_hosts:
