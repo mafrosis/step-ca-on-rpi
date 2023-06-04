@@ -1,6 +1,6 @@
-ARG STEP_VERSION=0.22.0
-ARG STEP_CERTS_VERSION=0.22.1
-ARG ARCH=arm64
+ARG STEP_VERSION
+ARG STEP_CERTS_VERSION
+ARG ARCH=amd64
 
 
 FROM golang:1.18-alpine as builder
@@ -21,13 +21,13 @@ RUN curl -o /tmp/step.tgz -L https://github.com/smallstep/cli/releases/download/
 	tar xzf /tmp/step.tgz --strip-components=1 -C /tmp
 
 
-FROM alpine:3.16
+FROM alpine:3.17
 
 COPY --from=builder /tmp/bin/step /usr/local/bin
 COPY --from=builder /go/certificates/bin/step-ca /usr/local/bin
 COPY --from=builder /go/certificates/bin/step-yubikey-init /usr/local/bin
 
-RUN apk add --no-cache ca-certificates jq pcsc-lite-libs
+RUN apk add --no-cache ca-certificates dnsmasq jq pcsc-lite-libs
 
 ENV UID=1000
 ENV GID=1000
