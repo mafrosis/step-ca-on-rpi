@@ -79,20 +79,6 @@
 				}
 			},
 			{
-				"type": "JWK",
-				"name": "HomeAssistantProxy",
-				"key": {
-					"use": "sig",
-					"kty": "EC",
-					"kid": "zWNTYWePfpc36RqZnueegPktGIPpDqSupJs5Dq6fNYQ",
-					"crv": "P-256",
-					"alg": "ES256",
-					"x": "BF5omA7UVSoKn1nDklCnha0-S9K5ZOuBATlsumgLZ2g",
-					"y": "rloCwytmbo1LhpdNNi8jP42qGgBnuXV8uSlioqrYjNk"
-				},
-				"encryptedKey": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJqd2sranNvbiIsImVuYyI6IkEyNTZHQ00iLCJwMmMiOjEwMDAwMCwicDJzIjoiN0ZndGtUSjl1ZHc3TkRnRGlGS3o5USJ9.gkmKqlAHBgPEGAn6mNloFjeC7WJO8LLNU5pFrB8QozfR_ytB2Q_hcg.z3RlS8eibMB6KzxE.ssJA0hzyjnLoWo31Rxjt8fWDXeb_qelly8yImIuP990Ge0d2jCREutl33qZWwUtQAmgfxjE5ygoduFkzLRPR72sujiUuam2X1IbkHxsH4zSYO9HOtt4s4u16wwLhaHAmLOIuPHzD8_BNSpKYs00rzx53vZK295YVJ2qhCrbFrxVl-aBD3yPBmMRYzisBhP8P096YDNmH_3LvUFTgXMN8sopxXZ2KX04dKDkZpfsWlmeWzylPT90I7Ljlq4GJxtCjrtcYeCg5_x5exh_ObShQvDZo7VTojHDPtWxNTJrqzXy8rrf5CDe-fXCvAbv-AKUlgevH0sYmbgVBym_Ywf0.2066xKusUEUzDfb6wTFsbA"
-			},
-			{
 				"type": "ACME",
 				"name": "acme"
 			}
