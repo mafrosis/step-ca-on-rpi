@@ -46,7 +46,8 @@
 				},
 				"encryptedKey": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJqd2sranNvbiIsImVuYyI6IkEyNTZHQ00iLCJwMmMiOjEwMDAwMCwicDJzIjoiQzRBZHBOVlh0MWNSSUNCbFY2eFZsdyJ9.Lj85lOhBQ2I5R9Vei6xG3d8SmoWKDyA-QKwiOfCH4AaOGFuRJjRgsw.LtdfY2zc2JhQH-E5.5BEU5sobvVmqPXZj4wN7BUXei3Q8QvcB5odZEwrzYR0EzhPLlkUiG4dECF0C3OXj8U2Orr7Nv-cYvmrw-frboua4DNt2RlLhWsz72y4L_eIlUTO2VjqLK1vqmRJQh2n7rJjdbE8Ku0u_kikyrUOSxn2MJ_FsjgSR4QR97tN15eu2LnKAYBGR6GNDINIUi29pkxfhhbbOoh1X-JmOo-tTz3UEmYvk4aWl_kGaLexpze_1wkm6ZrPmhf1u9a8-0R83oEjDRFwhiGu2ZbTAdcRWoTkRT1p1LT_ZTLvXydfbmWX8TSVAhp6K-vdleyR_1KkX2RNg6SlaejCzAiqgNyc.ksV6eelJoDjYiQcT1rxTOA",
 				"claims": {
-					"enableSSHCA": true
+					"enableSSHCA": true,
+					"maxTLSCertDuration": "50000h"
 				}
 			},
 			{
